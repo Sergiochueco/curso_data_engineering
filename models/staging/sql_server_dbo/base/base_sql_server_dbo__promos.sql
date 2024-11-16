@@ -7,19 +7,16 @@
 WITH src_promos AS (
     SELECT * 
     FROM {{ source('sql_server_dbo', 'promos') }}
-    ),
-
-add_no_promo AS (
-    SELECT
-        promo_id,
-        discount,
-        status,
-        _fivetran_deleted,
-        _fivetran_synced AS date_load
-    FROM src_promos
-    )
-
+), insert_new_value AS (
+     SELECT 
+        'sin promo' AS promo_id, 
+        0 AS discount,  
+        'sin promo' AS status, 
+        null AS _fivetran_deleted,
+        '0001-01-01 00:00:00.000 +0200'::TIMESTAMP_TZ AS _fivetran_synced
+)
 SELECT * 
-FROM add_no_promo
+FROM src_promos
 UNION ALL 
-SELECT ('sin promo',0,'sin promo',0001-01-01 00:00:00.000 +0000,0001-01-01 00:00:00.000 +0000)
+SELECT *
+FROM insert_new_value
