@@ -23,9 +23,9 @@ WITH src_promos AS (
 )
 SELECT 
     SHA2(promo_id, 256) AS hashed_promo_id,
-    PROMO_ID AS description,
+    LOWER(PROMO_ID) AS description,
     DISCOUNT AS discount_in_dollars,
     STATUS AS status,
     _FIVETRAN_DELETED AS eliminado_por_fivetran,
     _FIVETRAN_SYNCED AS data_load_at_madrid_utc
-FROM union_values;
+FROM union_values
