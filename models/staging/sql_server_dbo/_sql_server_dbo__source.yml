@@ -21,6 +21,9 @@ sources:
         loaded_at_field: _fivetran_synced
         columns:
           - name: address_id
+            tests:
+                - not_null
+                - unique
           - name: zipcode
           - name: country
           - name: address
@@ -32,6 +35,9 @@ sources:
         loaded_at_field: _fivetran_synced
         columns:
           - name: event_id
+            tests:
+                - not_null
+                - unique
           - name: page_url
           - name: event_type
           - name: user_id
@@ -47,6 +53,9 @@ sources:
         loaded_at_field: _fivetran_synced
         columns:
           - name: order_id
+            tests:
+                - not_null
+                - unique
           - name: shipping_service
           - name: shipping_cost
           - name: address_id
@@ -77,6 +86,9 @@ sources:
         loaded_at_field: _fivetran_synced
         columns:
           - name: product_id
+            tests:
+                - not_null
+                - unique
           - name: price
           - name: inventory
           - name: _fivetran_deleted
@@ -87,6 +99,9 @@ sources:
         loaded_at_field: _fivetran_synced
         columns:
           - name: promo_id
+            tests:
+                - not_null
+                - unique
           - name: discount
           - name: status
           - name: _fivetran_deleted
@@ -97,6 +112,9 @@ sources:
         loaded_at_field: _fivetran_synced
         columns:
           - name: user_id
+            tests:
+                - not_null
+                - unique
           - name: updated_at
           - name: address_id
           - name: last_name
