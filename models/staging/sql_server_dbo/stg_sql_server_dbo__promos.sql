@@ -27,5 +27,5 @@ SELECT
     DISCOUNT AS discount_in_dollars,
     STATUS AS status,
     _FIVETRAN_DELETED AS eliminado_por_fivetran,
-    _FIVETRAN_SYNCED AS data_load_at_madrid_utc
+    CONVERT_TIMEZONE('UTC', TO_TIMESTAMP_TZ(_FIVETRAN_SYNCED)) AS data_load_utc
 FROM union_values
