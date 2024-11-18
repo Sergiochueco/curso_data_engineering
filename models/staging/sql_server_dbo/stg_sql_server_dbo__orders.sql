@@ -4,7 +4,7 @@
   )
 }}
 
-WITH distinct_state AS (
+WITH src_orders AS (
     SELECT * 
     FROM {{ source('sql_server_dbo', 'orders') }}
 )
@@ -25,5 +25,5 @@ SELECT
 	tracking_id,
     _FIVETRAN_DELETED AS eliminado_por_fivetran,
     CONVERT_TIMEZONE('UTC', TO_TIMESTAMP_TZ(_FIVETRAN_SYNCED)) AS data_load_utc
-FROM distinct_state
+FROM src_orders
 
