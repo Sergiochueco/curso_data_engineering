@@ -8,7 +8,8 @@ WITH src_budget AS (
     SELECT * 
     FROM {{ source('google_sheets', 'budget') }}
 )
-SELECT 
+SELECT
+   _row,
    product_id,
    quantity,
    MONTH(month) AS month,

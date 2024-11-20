@@ -10,7 +10,7 @@ WITH src_products AS (
 )
 SELECT 
     product_id,
-	price AS price_dollars,
+	price AS price_euros,
 	name,
 	inventory AS inventory_quantity,
 	_FIVETRAN_DELETED AS eliminado_por_fivetran,
