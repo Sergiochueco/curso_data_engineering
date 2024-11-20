@@ -6,14 +6,14 @@
 
 WITH distinct_state AS (
     SELECT * 
-    FROM {{ source('sql_server_dbo', 'addresses') }}
+    FROM {{ ref('base_sql_server_dbo__addresses') }}
 )
 SELECT 
     DISTINCT
-        SHA2(state, 256) AS state_id,
-        state as state_usa,
-        _FIVETRAN_DELETED AS eliminado_por_fivetran,
-        CONVERT_TIMEZONE('UTC', TO_TIMESTAMP_TZ(_FIVETRAN_SYNCED)) AS data_load_utc
+        state_id,
+        states_usa,
+        eliminado_por_fivetran,
+        data_load_utc
 FROM distinct_state
 
 

@@ -1,0 +1,21 @@
+version: 2
+
+sources:
+
+  - name: db # name of the source 
+    schema: prueba_snapshot # this is the schema our raw data lives in
+    database: ALUMNO9_DEV_BRONZE_DB # this is the name of our database
+
+    quoting:
+        database: false
+        schema: false
+        identifier: false
+
+    tables:
+
+      - name: users
+        columns:
+          - name: Nombre
+          - name: DNI
+          - name: email
+          - name: fecha_alta_sistema
