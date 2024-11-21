@@ -13,6 +13,7 @@ SELECT
     CONVERT_TIMEZONE('UTC', TO_TIMESTAMP_TZ(created_at)) AS data_created_at_utc,
     address_id,
     user_id,
+    {{ dbt_utils.generate_surrogate_key(['shipping_service']) }} AS id_shipping_service,
 	shipping_service,
 	shipping_cost AS shipping_cost_euros,
     order_cost AS order_cost_euros,
