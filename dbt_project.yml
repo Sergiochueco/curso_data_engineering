@@ -39,9 +39,6 @@ models:
   +transient: false
   curso_data_engineering:
     # Applies to all files under models/example/
-    base:
-      +materialized: table
-      +database: "{{ env_var('DBT_ENVIRONMENTS') }}_SILVER_DB"
     staging:
       +materialized: view
       +database: "{{ env_var('DBT_ENVIRONMENTS') }}_SILVER_DB"
