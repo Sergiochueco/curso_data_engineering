@@ -21,14 +21,26 @@ sources:
         loaded_at_field: _fivetran_synced
         columns:
           - name: address_id
+            description: 
+              UUID for each unique address on platform
             tests:
                 - not_null
                 - unique
           - name: zipcode
+            description: 
+              code for each specific address street
           - name: country
+            description: 
+              name of country
           - name: address
+            description: 
+              street name
           - name: state
+            description: 
+              name of state 
           - name: _fivetran_deleted
+            description: 
+              if fivetran delete value some time
           - name: _fivetran_synced
     
       - name: events
@@ -46,6 +58,8 @@ sources:
           - name: created_at
           - name: order_id
           - name: _fivetran_deleted
+            description: 
+              if fivetran delete value some time
           - name: _fivetran_synced
 
 
@@ -69,6 +83,8 @@ sources:
           - name: tracking_id
           - name: status
           - name: _fivetran_deleted
+            description: 
+              if fivetran delete value some time
           - name: _fivetran_synced
 
 
@@ -79,6 +95,8 @@ sources:
           - name: product_id
           - name: quantity
           - name: _fivetran_deleted
+            description: 
+              if fivetran delete value some time
           - name: _fivetran_synced
       
       
@@ -92,6 +110,8 @@ sources:
           - name: price
           - name: inventory
           - name: _fivetran_deleted
+            description: 
+              if fivetran delete value some time
           - name: _fivetran_synced
       
       
@@ -105,6 +125,8 @@ sources:
           - name: discount
           - name: status
           - name: _fivetran_deleted
+            description: 
+              if fivetran delete value some time
           - name: _fivetran_synced
       
       

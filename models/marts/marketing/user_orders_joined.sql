@@ -1,3 +1,9 @@
+{{
+  config(
+    materialized='table'
+  )
+}}
+
 WITH stg_users AS (
     SELECT * 
     FROM {{ ref('stg_sql_server_dbo__users') }}
@@ -15,6 +21,7 @@ WITH stg_users AS (
     FROM {{ref('stg_sql_server_dbo__state')}}
 )
 SELECT 
+    distinct
     u.user_id,
     u.first_name,
     u.last_name,
@@ -26,8 +33,9 @@ SELECT
     a.zipcode,
     s.states_usa,
     a.country,
-    o.order_id,
-    a.state_id
+    a.state_id,
+    count(o.order_id) AS total_number_orders
+
     -- sum(case when e.event_type = 'page_view' THEN 1 ELSE 0 END) AS page_view,
     -- sum(case when e.event_type = 'add_to_cart' THEN 1 ELSE 0 END) AS add_to_cart,
     -- sum(case when e.event_type = 'checkout' THEN 1 ELSE 0 END) AS checkout,
@@ -39,3 +47,6 @@ LEFT JOIN stg_addresses as a
     ON o.address_id = a.address_id
 LEFT JOIN stg_state as s
     ON a.state_id = s.state_id
+
+GROUP BY u.user_id, u.first_name, u.last_name, u.email, u.phone_number, u.data_created_utc, u.data_updated_utc, u.address_id, a.zipcode,s.states_usa,a.state_id,a.country
+ORDER BY user_id DESC

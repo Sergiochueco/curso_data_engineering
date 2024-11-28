@@ -37,7 +37,7 @@ clean-targets:         # directories to be removed by `dbt clean`
 
 models:
   +transient: false
-  curso_data_engineering:
+  my_new_project:
     # Applies to all files under models/example/
     staging:
       +materialized: view
@@ -46,7 +46,6 @@ models:
         +schema: google_sheets
       sql_server_dbo:
         +schema: sql_server_dbo
-      
     marts:
       +materialized: table
       +database: "{{ env_var('DBT_ENVIRONMENTS') }}_GOLD_DB"
