@@ -16,15 +16,19 @@ with date as (
 )
 
 select
-      date_day as fecha_forecast
+      date_day as date
     , year(date_day)*10000+month(date_day)*100+day(date_day) as id_date
     , year(date_day) as anio
     , month(date_day) as mes
-    ,monthname(date_day) as desc_mes
+    , monthname(date_day) as desc_mes
     , year(date_day)*100+month(date_day) as id_anio_mes
+    ,quarter(date_day) as quarter
     , date_day-1 as dia_previo
     , year(date_day)||weekiso(date_day)||dayofweek(date_day) as anio_semana_dia
-    , weekiso(date_day) as semana
+    , weekiso(date_day) as semana_anio
+    , dayofweek(date_day) as day_of_week_number
+    , dayname(date_day) as day_of_week_name
+    , dayofyear(date_day) as day_of_year
 from date
 order by
     date_day desc
