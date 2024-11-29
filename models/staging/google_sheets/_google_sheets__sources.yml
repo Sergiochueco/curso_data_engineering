@@ -23,15 +23,13 @@ sources:
         loaded_at_field: _fivetran_synced
         columns:
           - name: _row
-            description: 
-              Number of each row from google sheet
+            description: Number of each row from google sheet
             tests:
               - not_null
               - unique
 
           - name: product_id
-            description: 
-              UUID for each unique product on platform
+            description: UUID for each unique product on platform
             tests:
               - not_null
               - relationships:
@@ -39,20 +37,17 @@ sources:
                   field: product_id
 
           - name: quantity
-            description: 
-              Number of units for each product and each month for products
+            description: Number of units for each product and each month for products
             tests:
               - not_null
               - positive_values
 
           - name: month
-            description:
-              Each month for the busget -> End of the month
+            description: Each month for the busget -> End of the month
             tests:
               - not_null
             
           - name: _fivetran_synced
-            description: 
-              Date that the data was loaded
+            description: Date that the data was loaded
             tests:
               - not_null
