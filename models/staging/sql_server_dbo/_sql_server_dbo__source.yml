@@ -158,6 +158,9 @@ sources:
           tests:
             - not_null
             - unique
+            - relationships:
+                  to: source('sql_server_db','orders')
+                  field: address_id
         - name: zipcode
           description: Code for each specific address street
           tests:
@@ -166,6 +169,8 @@ sources:
           description: Name of the country for the address
         - name: address
           description: Street name for the address
+          tests:
+            - not_null
         - name: state
           description: Name of the state for the address
         - name: _fivetran_deleted
@@ -189,8 +194,16 @@ sources:
           description: Type of event (e.g., page_view, click)
         - name: user_id
           description: Identifier of the user who triggered the event
+          tests:
+          - relationships:
+                  to: source('sql_server_db','users')
+                  field: user_id
         - name: product_id
           description: Identifier of the product associated with the event
+          tests:
+          - relationships:
+                  to: source('sql_server_db','products')
+                  field: product_id
         - name: session_id
           description: Identifier of the session during which the event occurred
         - name: created_at
@@ -316,7 +329,7 @@ sources:
         - name: phone_number
           description: Contact phone number for the user
         - name: total_orders
-          description: Total number of orders placed by the user
+          description: Total number of orders placed by the user (incorrect feature)
         - name: first_name
           description: First name of the user
         - name: email

@@ -15,6 +15,7 @@ SELECT
     first_name,
     phone_number,
     email,
+    -- total_orders,
     CONVERT_TIMEZONE('UTC', TO_TIMESTAMP_TZ(updated_at)) AS data_updated_utc,
     CONVERT_TIMEZONE('UTC', TO_TIMESTAMP_TZ(created_at)) AS data_created_utc,
     _FIVETRAN_DELETED AS eliminado_por_fivetran,

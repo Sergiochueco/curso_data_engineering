@@ -4,19 +4,18 @@
   )
 }}
 
-WITH distinct_adress AS (
+WITH distinct_addresses AS (
     SELECT * 
-    FROM {{ ref('base_sql_server_dbo__addresses') }}
+    FROM {{ source('sql_server_dbo', 'addresses') }}
 )
 SELECT 
     DISTINCT
         country,
         address_id,
         address,
-        state_id,
-        zipcode,
-        eliminado_por_fivetran,
-        data_load_utc
-FROM distinct_adress
-
-
+        zipcode ::VARCHAR(15) AS zipcode,
+        {{ dbt_utils.generate_surrogate_key(['state']) }} AS state_id,
+        state as states_usa,
+        _FIVETRAN_DELETED AS eliminado_por_fivetran,
+        CONVERT_TIMEZONE('UTC', TO_TIMESTAMP_TZ(_FIVETRAN_SYNCED)) AS data_load_utc
+FROM distinct_addresses
