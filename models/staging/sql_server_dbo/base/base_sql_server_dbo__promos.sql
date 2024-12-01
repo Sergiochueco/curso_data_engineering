@@ -13,7 +13,7 @@ WITH src_promos AS (
         0 AS discount,  
         'active' AS status, 
         null AS _fivetran_deleted,
-        '0001-01-01 00:00:00.000 +0200'::TIMESTAMP_TZ AS _fivetran_synced
+        '1970-01-01 00:00:00.000 +0200'::TIMESTAMP_TZ AS _fivetran_synced
 ), union_values AS (
     SELECT * 
     FROM src_promos
