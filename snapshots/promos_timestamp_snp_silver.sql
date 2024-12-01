@@ -1,4 +1,4 @@
-{% snapshot promos_timestamp_snp %}
+{% snapshot promos_silver_timestamp_snp %}
 
 {{
     config(
