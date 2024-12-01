@@ -15,138 +15,7 @@ sources:
       warn_after: {count: 20, period: day}
       error_after: {count: 21, period: day}
 
-    # tables:
-
-    #   - name: addresses
-    #     loaded_at_field: _fivetran_synced
-    #     columns:
-    #       - name: address_id
-    #         description: 
-    #           UUID for each unique address on platform
-    #         tests:
-    #             - not_null
-    #             - unique
-    #       - name: zipcode
-    #         description: 
-    #           code for each specific address street
-    #       - name: country
-    #         description: 
-    #           name of country
-    #       - name: address
-    #         description: 
-    #           street name
-    #       - name: state
-    #         description: 
-    #           name of state 
-    #       - name: _fivetran_deleted
-    #         description: 
-    #           if fivetran delete value some time
-    #       - name: _fivetran_synced
-    
-    #   - name: events
-    #     loaded_at_field: _fivetran_synced
-    #     columns:
-    #       - name: event_id
-    #         tests:
-    #             - not_null
-    #             - unique
-    #       - name: page_url
-    #       - name: event_type
-    #       - name: user_id
-    #       - name: product_id
-    #       - name: session_id
-    #       - name: created_at
-    #       - name: order_id
-    #       - name: _fivetran_deleted
-    #         description: 
-    #           if fivetran delete value some time
-    #       - name: _fivetran_synced
-
-
-    #   - name: orders
-    #     loaded_at_field: _fivetran_synced
-    #     columns:
-    #       - name: order_id
-    #         tests:
-    #             - not_null
-    #             - unique
-    #       - name: shipping_service
-    #       - name: shipping_cost
-    #       - name: address_id
-    #       - name: created_at
-    #       - name: promo_id
-    #       - name: estimated_delivery_at
-    #       - name: order_cost
-    #       - name: user_id
-    #       - name: order_total
-    #       - name: delivered_at
-    #       - name: tracking_id
-    #       - name: status
-    #       - name: _fivetran_deleted
-    #         description: 
-    #           if fivetran delete value some time
-    #       - name: _fivetran_synced
-
-
-    #   - name: order_items
-    #     loaded_at_field: _fivetran_synced
-    #     columns:
-    #       - name: order_id
-    #       - name: product_id
-    #       - name: quantity
-    #       - name: _fivetran_deleted
-    #         description: 
-    #           if fivetran delete value some time
-    #       - name: _fivetran_synced
       
-      
-    #   - name: products
-    #     loaded_at_field: _fivetran_synced
-    #     columns:
-    #       - name: product_id
-    #         tests:
-    #             - not_null
-    #             - unique
-    #       - name: price
-    #       - name: inventory
-    #       - name: _fivetran_deleted
-    #         description: 
-    #           if fivetran delete value some time
-    #       - name: _fivetran_synced
-      
-      
-    #   - name: promos
-    #     loaded_at_field: _fivetran_synced
-    #     columns:
-    #       - name: promo_id
-    #         tests:
-    #             - not_null
-    #             - unique
-    #       - name: discount
-    #       - name: status
-    #       - name: _fivetran_deleted
-    #         description: 
-    #           if fivetran delete value some time
-    #       - name: _fivetran_synced
-      
-      
-    #   - name: users
-    #     loaded_at_field: _fivetran_synced
-    #     columns:
-    #       - name: user_id
-    #         tests:
-    #             - not_null
-    #             - unique
-    #       - name: updated_at
-    #       - name: address_id
-    #       - name: last_name
-    #       - name: created_at
-    #       - name: phone_number
-    #       - name: total_orders
-    #       - name: first_name
-    #       - name: email
-    #       - name: _fivetran_deleted
-    #       - name: _fivetran_synced
 
     tables:
 
@@ -210,6 +79,10 @@ sources:
           description: Timestamp when the event was created
         - name: order_id
           description: Order identifier associated with the event, if applicable
+          tests:
+          - relationships:
+                  to: source('sql_server_db','orders')
+                  field: order_id
         - name: _fivetran_deleted
           description: Indicates if the record was deleted in Fivetran sync process
         - name: _fivetran_synced
@@ -235,20 +108,32 @@ sources:
           description: Timestamp when the order was created
         - name: promo_id
           description: Identifier for the promotional offer applied to the order
+          tests:
+            - relationships:
+                field: source('sql_server_db','promo_id')
+                to: promo_id
         - name: estimated_delivery_at
           description: Estimated date for the order's delivery
         - name: order_cost
           description: Total cost of the order before shipping
+          tests:
+            - positive_values
         - name: user_id
           description: Identifier for the user who placed the order
         - name: order_total
           description: Total value of the order, including shipping and promotions
+          tests:
+            - positive_values
         - name: delivered_at
           description: Timestamp when the order was delivered
         - name: tracking_id
           description: Tracking number for the shipment of the order
         - name: status
-          description: Current status of the order (e.g., pending, shipped, delivered)
+          description: '{{ doc("order_status") }}'
+          tests:
+            - not_null
+            - accepted_values:
+                values: ['delivered', 'preparing', 'shipped']
         - name: _fivetran_deleted
           description: Indicates if the record was deleted in Fivetran sync process
         - name: _fivetran_synced
@@ -261,10 +146,22 @@ sources:
       columns:
         - name: order_id
           description: Identifier for the order that the item belongs to
+          tests:
+            - not_null
+            - relationships:
+                field: source('sql_server_db','orders')
+                to: order_id
         - name: product_id
           description: Identifier for the product in the order item
+          tests:
+            - not_null
+            - relationships:
+                  field: source('sql_server_db','products')
+                  to: product_id
         - name: quantity
           description: Quantity of the product ordered
+          tests:
+            - positive_values
         - name: _fivetran_deleted
           description: Indicates if the record was deleted in Fivetran sync process
         - name: _fivetran_synced
@@ -282,8 +179,12 @@ sources:
             - unique
         - name: price
           description: Price of the product
+          tests:
+            - positive_values
         - name: inventory
           description: Quantity of the product available in inventory
+          tests:
+            - not_null
         - name: _fivetran_deleted
           description: Indicates if the record was deleted in Fivetran sync process
         - name: _fivetran_synced
@@ -299,10 +200,16 @@ sources:
           tests:
             - not_null
             - unique
+            - relationships:
+                field: source('sql_server_db','orders')
+                to: promo_id
         - name: discount
-          description: Discount percentage or amount offered by the promo
+          description: Discount not percentage, amount offered by the promo
         - name: status
           description: Current status of the promo (e.g., active, expired)
+          tests:
+            - accepted_values:
+                values: ['active', 'inactive']
         - name: _fivetran_deleted
           description: Indicates if the record was deleted in Fivetran sync process
         - name: _fivetran_synced
@@ -328,8 +235,12 @@ sources:
           description: Timestamp when the user account was created
         - name: phone_number
           description: Contact phone number for the user
+          tests:
+            - phone_number_format
         - name: total_orders
           description: Total number of orders placed by the user (incorrect feature)
+          tests:
+            - positive_values
         - name: first_name
           description: First name of the user
         - name: email
