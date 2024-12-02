@@ -1,0 +1,49 @@
+version: 2
+
+models:
+  - name: user_events_joined
+    description: "Aggregated information about user events and interactions during sessions."
+    columns:
+      - name: session_id
+        data_type: varchar
+        description: "Unique identifier for the user's session."
+
+      - name: user_id
+        data_type: varchar
+        description: "Unique identifier for the user associated with the session."
+
+      - name: first_name
+        data_type: varchar
+        description: "First name of the user."
+
+      - name: email
+        data_type: varchar
+        description: "Email address of the user."
+
+      - name: first_event_time_utc
+        data_type: timestamp_tz
+        description: "Timestamp of the first event in the session (in UTC)."
+
+      - name: last_event_time_utc
+        data_type: timestamp_tz
+        description: "Timestamp of the last event in the session (in UTC)."
+
+      - name: session_length_minutes
+        data_type: number
+        description: "Duration of the session in minutes."
+
+      - name: page_view
+        data_type: number
+        description: "Total number of page views during the session."
+
+      - name: add_to_cart
+        data_type: number
+        description: "Number of times items were added to the cart during the session."
+
+      - name: checkout
+        data_type: number
+        description: "Number of checkout events during the session."
+
+      - name: package_shipped
+        data_type: number
+        description: "Number of items shipped as a result of the session's activities."

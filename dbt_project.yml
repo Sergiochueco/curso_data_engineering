@@ -42,10 +42,12 @@ models:
     staging:
       +materialized: view
       +database: "{{ env_var('DBT_ENVIRONMENTS') }}_SILVER_DB"
+
       google_sheets:
         +schema: google_sheets
       sql_server_dbo:
         +schema: sql_server_dbo
+      
     marts:
       +materialized: table
       +database: "{{ env_var('DBT_ENVIRONMENTS') }}_GOLD_DB"
@@ -55,6 +57,8 @@ models:
         +schema: marketing
       producto:
         +schema: producto
+      ux_ui:
+        +schema: ux_ui
 seeds:
   +schema: SEEDS
   +database: "{{ env_var('DBT_ENVIRONMENTS') }}_BRONZE_DB"        
