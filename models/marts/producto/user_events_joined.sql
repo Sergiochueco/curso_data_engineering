@@ -4,11 +4,11 @@
   )
 }}
 
-WITH stg_users AS (
+WITH dim_users AS (
     SELECT * 
-    FROM {{ ref('stg_sql_server_dbo__users') }}
+    FROM {{ ref('dim__users') }}
 )
-, stg_events AS(
+, fct_events AS(
     SELECT *
     FROM {{ ref('stg_sql_server_dbo__events') }}
 )
@@ -24,8 +24,8 @@ SELECT
     sum(case when e.event_type = 'add_to_cart' THEN 1 ELSE 0 END) AS add_to_cart,
     sum(case when e.event_type = 'checkout' THEN 1 ELSE 0 END) AS checkout,
     sum(case when e.event_type = 'package_shipped' THEN 1 ELSE 0 END) AS package_shipped
-FROM stg_events as e
-LEFT JOIN stg_users as u
+FROM fct_events as e
+LEFT JOIN dim_users as u
     ON e.user_id = u.user_id
 GROUP BY e.session_id,u.user_id,u.first_name,u.email
 
