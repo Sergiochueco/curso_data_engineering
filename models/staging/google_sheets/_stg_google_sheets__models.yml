@@ -2,28 +2,33 @@ version: 2
 
 models:
   - name: stg_google_sheets__budget
-    description: ""
+    description: "Transform and cast data"
     columns:
       - name: _row
         data_type: number
-        description: ""
+        description: "Number of each row from google sheet"
 
       - name: product_id
         data_type: varchar
-        description: ""
+        description: "UUID for each unique product on platform"
 
       - name: quantity
         data_type: number
-        description: ""
+        description: "Number of units for each product and each month for products"
 
       - name: month
         data_type: number
-        description: ""
+        description: "Each month for the busget"
 
       - name: year
         data_type: number
-        description: ""
+        description: "Each year for the budget"
 
       - name: data_load_utc
         data_type: timestamp_tz
-        description: ""
+        description: "Date that the data was loaded"
+
+
+
+
+           

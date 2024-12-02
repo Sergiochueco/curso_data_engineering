@@ -10,7 +10,7 @@ WITH dim_users AS (
 )
 , fct_events AS(
     SELECT *
-    FROM {{ ref('stg_sql_server_dbo__events') }}
+    FROM {{ ref('fct_events') }}
 )
 SELECT 
     e.session_id,

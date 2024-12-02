@@ -2,116 +2,121 @@ version: 2
 
 models:
   - name: base_sql_server_dbo__order_items
-    description: ""
+    description: "Transform and cast data order_items"
     columns:
       - name: order_id
         data_type: varchar
-        description: ""
+        description: "Identifier for the order that the item belongs to"
 
       - name: product_id
         data_type: varchar
-        description: ""
+        description: "Identifier for the product in the order item"
 
       - name: quantity
         data_type: number
-        description: ""
+        description: "Quantity of the product ordered"
 
       - name: eliminado_por_fivetran
         data_type: boolean
-        description: ""
+        description: "Indicates if the record was deleted in Fivetran sync process"
 
       - name: data_load_utc
         data_type: timestamp_tz
-        description: ""
+        description: "Timestamp of the last Fivetran sync"
   
 
+
   - name: base_sql_server_dbo__orders
-    description: ""
+    description: "Transform and cast data orders"
     columns:
       - name: order_id
         data_type: varchar
-        description: ""
+        description: "Unique identifier for each order"
 
       - name: data_created_at_utc
         data_type: timestamp_tz
-        description: ""
+        description: "Timestamp when the order was created"
 
       - name: address_id
         data_type: varchar
-        description: ""
+        description: "Identifier for the address associated with the order"
 
       - name: user_id
         data_type: varchar
-        description: ""
+        description: "Identifier for the user who placed the order"
 
       - name: id_shipping_service
         data_type: varchar
-        description: ""
+        description: "Identifier for the shipping service used for the order"
 
       - name: shipping_service
         data_type: varchar
-        description: ""
+        description: "The shipping service used for the order"
 
       - name: shipping_cost_usd
         data_type: float
-        description: ""
+        description: "The cost of shipping for the order"
 
       - name: order_cost_usd
         data_type: float
-        description: ""
+        description: "Total cost of the order before shipping"
 
       - name: order_total_usd
         data_type: float
-        description: ""
+        description: "Total value of the order, including shipping and promotions"
 
       - name: promo_id
         data_type: varchar
-        description: ""
+        description: "Identifier for the promotional offer applied to the order"
 
       - name: status
         data_type: varchar
-        description: ""
+        description: '{{ doc("order_status") }}'
 
       - name: data_estimated_delivery_at_utc
         data_type: timestamp_tz
-        description: ""
+        description: "Estimated date for the order's delivery"
 
       - name: data_delivered_at_utc
         data_type: timestamp_tz
-        description: ""
+        description: "Timestamp utc when the order was delivered"
 
       - name: tracking_id
         data_type: varchar
-        description: ""
+        description: "Tracking number for the shipment of the order"
 
       - name: eliminado_por_fivetran
         data_type: boolean
-        description: ""
+        description: "Indicates if the record was deleted in Fivetran sync process"
 
       - name: data_load_utc
         data_type: timestamp_tz
-        description: ""
+        description: "Timestamp of the last Fivetran sync"
+
 
 
   - name: base_sql_server_dbo__promos
-    description: ""
+    description: "Transform and cast data promos"
     columns:
       - name: promo_id
         data_type: varchar
-        description: ""
+        description: "Name for each promotional offer"
 
       - name: discount
         data_type: number
-        description: ""
+        description: "Discount not percentage, amount offered by the promo"
 
       - name: status
         data_type: varchar
-        description: ""
+        description: "Current status of the promo (e.g., active, expired)"
 
       - name: _fivetran_deleted
         data_type: boolean
-        description: ""
+        description: "Indicates if the record was deleted in Fivetran sync process"
 
       - name: _fivetran_synced
         data_type: timestamp_tz
-        description: ""
+        description: "Timestamp of the last Fivetran sync"
+  
+  
+         

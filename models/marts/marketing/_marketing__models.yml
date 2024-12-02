@@ -1,0 +1,73 @@
+version: 2
+
+models:
+  - name: users_total_information
+    description: "Comprehensive information about users and their related data."
+    columns:
+      - name: user_id
+        data_type: varchar
+        description: "Unique identifier for the user."
+
+      - name: first_name
+        data_type: varchar
+        description: "First name of the user."
+
+      - name: last_name
+        data_type: varchar
+        description: "Last name of the user."
+
+      - name: email
+        data_type: varchar
+        description: "Email address of the user."
+
+      - name: phone_number
+        data_type: varchar
+        description: "Phone number of the user."
+
+      - name: data_created_utc
+        data_type: timestamp_tz
+        description: "Timestamp indicating when the user account was created (in UTC)."
+
+      - name: data_updated_utc
+        data_type: timestamp_tz
+        description: "Timestamp indicating the last update to the user account (in UTC)."
+
+      - name: address_id
+        data_type: varchar
+        description: "Unique identifier for the address associated with the user."
+
+      - name: zipcode
+        data_type: varchar
+        description: "Postal code for the user's address."
+
+      - name: states_usa
+        data_type: varchar
+        description: "State within the USA where the user is located."
+
+      - name: country
+        data_type: varchar
+        description: "Country where the user resides."
+
+      - name: total_number_orders
+        data_type: number
+        description: "Total number of orders placed by the user."
+
+      - name: total_order_cost_usd
+        data_type: float
+        description: "Total cost of all orders placed by the user, in USD."
+
+      - name: total_shipping_cost_usd
+        data_type: float
+        description: "Total shipping cost for all orders placed by the user, in USD."
+
+      - name: total_discount_usd
+        data_type: number
+        description: "Total amount of discounts applied to the user's orders, in USD."
+
+      - name: total_quantity_products
+        data_type: number
+        description: "Total quantity of products purchased by the user."
+
+      - name: total_diff_products
+        data_type: number
+        description: "Total number of unique products purchased by the user."
