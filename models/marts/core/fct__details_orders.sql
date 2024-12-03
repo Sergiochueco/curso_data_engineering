@@ -16,6 +16,8 @@ SELECT
     product_id,
     quantity,
     data_created_at_utc,
+    date,
+    time_date,
     address_id,
     user_id,
     id_shipping_service,

@@ -20,6 +20,8 @@ SELECT
     oi.product_id,
     oi.quantity,
     o.data_created_at_utc,
+    DATE(o.data_created_at_utc) AS date,
+    TIME(o.data_created_at_utc) AS time_date,
     o.address_id,
     o.user_id,
     o.id_shipping_service,
