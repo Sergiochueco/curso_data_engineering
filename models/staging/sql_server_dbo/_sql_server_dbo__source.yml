@@ -181,6 +181,8 @@ sources:
           description: Price of the product
           tests:
             - positive_values
+        - name: name
+          description: name of the product
         - name: inventory
           description: Quantity of the product available in inventory
           tests:

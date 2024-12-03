@@ -67,3 +67,6 @@ GROUP BY
     , a.country
    
 ORDER BY u.first_name, u.last_name ASC
+
+
+

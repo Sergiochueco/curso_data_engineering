@@ -1,0 +1,45 @@
+version: 2
+
+models:
+  - name: fct__events
+    description: "This table stores event data related to user interactions on the platform. It includes information about the event's unique identifier, the type of event, user, session, and related product, along with timestamps for when the data was created and loaded."
+    columns:
+      - name: event_id
+        data_type: varchar
+        description: "Unique identifier for each event. This value is used to track specific events that occur on the platform."
+
+      - name: page_url
+        data_type: varchar
+        description: "The URL of the page where the event took place. This helps in identifying the context of the event."
+
+      - name: event_type
+        data_type: varchar
+        description: "The type of event (e.g., click, view, purchase) that describes the action performed by the user."
+
+      - name: user_id
+        data_type: varchar
+        description: "Unique identifier for the user who triggered the event. This helps in tracking user behavior over time."
+
+      - name: product_id
+        data_type: varchar
+        description: "Unique identifier for the product associated with the event. This is used to link events to specific products."
+
+      - name: session_id
+        data_type: varchar
+        description: "Unique identifier for the session during which the event occurred. This is useful for understanding user activity in a single session."
+
+      - name: data_created_at_utc
+        data_type: timestamp_tz
+        description: "Timestamp of when the event data was created, recorded in UTC. This helps in tracking when the event was generated."
+
+      - name: order_id
+        data_type: varchar
+        description: "Unique identifier for an order associated with the event, if applicable. This can be used to link events to transactions."
+
+      - name: eliminado_por_fivetran
+        data_type: boolean
+        description: "Indicates whether the event was deleted by Fivetran during data synchronization. This flag helps in identifying any data removal during ETL processes."
+
+      - name: data_load_utc
+        data_type: timestamp_tz
+        description: "Timestamp of when the event data was loaded into the data warehouse, recorded in UTC. This is important for tracking data freshness and load times."
