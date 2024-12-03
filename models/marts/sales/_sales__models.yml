@@ -1,0 +1,62 @@
+version: 2
+
+models:
+  - name: fct__budget
+    description: "Fact table containing budgeted quantities for products by month and year."
+    columns:
+      - name: _row
+        data_type: number
+        description: "Unique row identifier for the budget record."
+
+      - name: product_id
+        data_type: varchar
+        description: "Unique identifier for the product."
+
+      - name: quantity
+        data_type: number
+        description: "The budgeted quantity for the product."
+
+      - name: month
+        data_type: number
+        description: "The numeric representation of the month (1-12)."
+
+      - name: year
+        data_type: number
+        description: "The year associated with the budget data."
+
+      - name: data_load_utc
+        data_type: timestamp_tz
+        description: "The timestamp of when the budget data was loaded into the system, in UTC."
+
+
+        
+  - name: sales_vs_budget
+    description: "Model comparing sales data to budgeted expectations."
+    columns:
+      - name: name
+        data_type: varchar
+        description: "The name of the product or category."
+
+      - name: product_id
+        data_type: varchar
+        description: "Unique identifier for the product."
+
+      - name: month
+        data_type: number
+        description: "The numeric representation of the month (1-12)."
+
+      - name: year
+        data_type: number
+        description: "The year associated with the sales and budget data."
+
+      - name: quantity_sales
+        data_type: number
+        description: "The total quantity of products sold for the given period."
+
+      - name: quantity_budget
+        data_type: number
+        description: "The budgeted quantity of products expected to be sold for the given period."
+
+      - name: diff_sales_to_budget
+        data_type: number
+        description: "The difference between actual sales and budgeted sales quantities."

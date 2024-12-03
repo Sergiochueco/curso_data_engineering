@@ -4,13 +4,14 @@
   )
 }}
 
-WITH stg_products_inventory AS (
+WITH int_inventory AS (
     SELECT * 
-    FROM {{ ref('stg_sql_server_dbo__products') }}
+    FROM {{ ref('int__inventory') }}
 )
 SELECT 
     product_id,
     inventory_quantity,
+    alert_inventory,
 	eliminado_por_fivetran,
     data_load_utc
-FROM stg_products_inventory
+FROM int_inventory

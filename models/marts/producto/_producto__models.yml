@@ -1,6 +1,31 @@
 version: 2
 
 models:
+  - name: fct__inventory
+    description: "Fact table containing inventory information and stock alerts."
+    columns:
+      - name: product_id
+        data_type: varchar
+        description: "Unique identifier for the product."
+
+      - name: inventory_quantity
+        data_type: number
+        description: "The current quantity of the product in inventory."
+
+      - name: alert_inventory
+        data_type: varchar
+        description: "The alert level for the product inventory, indicating replenishment needs."
+
+      - name: eliminado_por_fivetran
+        data_type: boolean
+        description: "Indicates whether the record was marked as deleted by Fivetran."
+
+      - name: data_load_utc
+        data_type: timestamp_tz
+        description: "The timestamp of when the data was loaded into the system, in UTC."
+
+
+        
   - name: user_events_joined
     description: "Aggregated information about user events and interactions during sessions."
     columns:

@@ -1,6 +1,63 @@
 version: 2
 
 models:
+  - name: stg_promos_timestamp_snp
+    description: "Transform and cast data snapshot promos"
+    columns:
+      - name: promo_id
+        data_type: varchar
+        description: "identifier for each promotional offer"
+
+      - name: description
+        data_type: varchar
+        description: "Name for each promotional offer"
+
+      - name: discount_in_usd
+        data_type: number
+        description: "Discount not percentage, amount offered by the promo"
+
+      - name: status
+        data_type: varchar
+        description: "Current status of the promo (e.g., active, expired)"
+
+      - name: eliminado_por_fivetran
+        data_type: boolean
+        description: "Indicates if the record was deleted in Fivetran sync process"
+
+      - name: data_load_utc
+        data_type: timestamp_tz
+        description: "Timestamp of the last Fivetran sync"
+
+
+  - name: stg_products_timestamp_snp
+    description: "Transform data from snapshot products"
+    columns:
+      - name: product_id
+        data_type: varchar
+        description: "Unique identifier for the product."
+
+      - name: price_usd
+        data_type: float
+        description: "Price of the product in USD."
+
+      - name: name
+        data_type: varchar
+        description: "Name of the product."
+
+      - name: inventory_quantity
+        data_type: number
+        description: "Number of units of the product available in inventory."
+
+      - name: eliminado_por_fivetran
+        data_type: boolean
+        description: "Indicates if the record was deleted in Fivetran sync process"
+
+      - name: data_load_utc
+        data_type: timestamp_tz
+        description: "Timestamp of the last Fivetran sync"
+
+
+
   - name: stg_sql_server_dbo__addresses
     description: "Transform and cast data addresses"
     columns:
@@ -33,31 +90,6 @@ models:
         description: "Indicates if the record was deleted in Fivetran sync process"
 
       - name: data_load_utc
-        data_type: timestamp_tz
-        description: "Timestamp of the last Fivetran sync"
-
-
-
-  - name: stg_promos_timestamp_snp
-    description: "Transform and cast data snapshot promos"
-    columns:
-      - name: promo_id
-        data_type: varchar
-        description: "Name for each promotional offer"
-
-      - name: discount
-        data_type: number
-        description: "Discount not percentage, amount offered by the promo"
-
-      - name: status
-        data_type: varchar
-        description: "Current status of the promo (e.g., active, expired)"
-
-      - name: _fivetran_deleted
-        data_type: boolean
-        description: "Indicates if the record was deleted in Fivetran sync process"
-
-      - name: _fivetran_synced
         data_type: timestamp_tz
         description: "Timestamp of the last Fivetran sync"
 
@@ -127,7 +159,7 @@ models:
 
       - name: data_load_utc
         data_type: timestamp_tz
-        description: "Timestamp of the last Fivetran sync" 
+        description: "Timestamp of the last Fivetran sync"
 
 
 
