@@ -43,3 +43,36 @@ models:
       - name: data_load_utc
         data_type: timestamp_tz
         description: "Timestamp of when the event data was loaded into the data warehouse, recorded in UTC. This is important for tracking data freshness and load times."
+
+
+
+  - name: visit_page_users
+    description: "This table captures data on user visits to product pages, including user-specific details, their session information, and actions related to cart additions, package shipments, and purchases."
+    columns:
+    - name: user_id
+      data_type: varchar
+      description: "Unique identifier for each user. This value helps to track user interactions and behavior on the platform."
+
+    - name: zipcode
+      data_type: varchar
+      description: "The user's postal code. This can be used for regional analysis and segmentation."
+
+    - name: states_usa
+      data_type: varchar
+      description: "The state within the United States where the user is located. This information helps in geo-targeting and location-based analytics."
+
+    - name: session_id
+      data_type: varchar
+      description: "Unique identifier for the session during which the user visited the product page. This allows tracking of user interactions within a specific session."
+
+    - name: number_add_cart
+      data_type: number
+      description: "The number of items the user added to their shopping cart during the session. This helps in understanding user engagement with products."
+
+    - name: number_package_shipped
+      data_type: number
+      description: "The number of packages shipped to the user as part of their order. This metric tracks the fulfillment of user purchases."
+
+    - name: is_purchase
+      data_type: varchar
+      description: "Indicates whether the user completed a purchase during the session. This column is used to track conversion rates from page visit to purchase."

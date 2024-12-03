@@ -24,7 +24,6 @@ SELECT
     , e.session_id
     , SUM(CASE WHEN 
                 e.event_type = 'add_to_cart' or 
-                e.event_type = 'package_shipped' or 
                 e.event_type = 'page_view' THEN 1 ELSE 0 END) AS total_clicks
     , SUM(CASE WHEN e.event_type = 'add_to_cart' THEN 1 ELSE 0 END) AS number_add_cart
     , SUM(CASE WHEN e.event_type = 'package_shipped' THEN 1 ELSE 0 END) AS number_package_shipped
