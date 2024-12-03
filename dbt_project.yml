@@ -67,9 +67,7 @@ models:
       +database: "{{ env_var('DBT_ENVIRONMENTS') }}_GOLD_DB"
       producto:
         +schema: producto
-seeds:
-  +schema: SEEDS
-  +database: "{{ env_var('DBT_ENVIRONMENTS') }}_BRONZE_DB"        
+    
 snapshots:
   +transient: false
   +target_database: "{{ env_var('DBT_ENVIRONMENTS') }}_SILVER_DB"
