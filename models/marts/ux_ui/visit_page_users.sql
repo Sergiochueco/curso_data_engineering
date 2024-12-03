@@ -12,9 +12,9 @@ WITH dim__users AS (
     SELECT *
     FROM {{ ref('dim__addresses_users') }}
 )
-, fct_events AS(
+, fct__events AS(
     SELECT *
-    FROM {{ ref('fct_events') }}
+    FROM {{ ref('fct__events') }}
 )
 , card_shipped AS (
 SELECT 
@@ -32,7 +32,7 @@ SELECT
 FROM dim__users AS u
 LEFT JOIN dim__addresses_users AS a
     ON u.address_id = a.address_id
-LEFT JOIN fct_events AS e
+LEFT JOIN fct__events AS e
     ON u.user_id = e.user_id
 
 GROUP BY 

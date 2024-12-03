@@ -18,7 +18,7 @@ models:
 
       - name: month
         data_type: number
-        description: "Each month for the busget"
+        description: "Each month for the budget"
 
       - name: year
         data_type: number

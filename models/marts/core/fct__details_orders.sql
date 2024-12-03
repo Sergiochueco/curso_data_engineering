@@ -1,6 +1,8 @@
 {{
   config(
-    materialized='table'
+    materialized='incremental',
+    unique_key=['order_id','product_id'],
+    on_schema_change ='fail'
   )
 }}
 
@@ -29,3 +31,8 @@ SELECT
 FROM stg_detail_orders
 
 
+{% if is_incremental() %}
+
+  where data_load_utc > (select max(data_load_utc) from {{ this }})
+
+{% endif %}

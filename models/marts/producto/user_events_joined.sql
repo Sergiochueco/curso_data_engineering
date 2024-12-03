@@ -10,7 +10,7 @@ WITH dim_users AS (
 )
 , fct_events AS(
     SELECT *
-    FROM {{ ref('fct_events') }}
+    FROM {{ ref('fct__events') }}
 )
 SELECT 
     e.session_id,

@@ -1,8 +1,11 @@
 {{
   config(
-    materialized='view'
+    materialized='incremental',
+    unique_key=['order_id','product_id'],
+    on_schema_change ='fail'
   )
 }}
+
 
 WITH base_orders AS (
     SELECT * 
@@ -34,3 +37,9 @@ JOIN base_order_items AS oi
     ON o.order_id = oi.order_id
 ORDER BY ORDER_ID
 
+
+{% if is_incremental() %}
+
+  where data_load_utc > (select max(data_load_utc) from {{ this }})
+
+{% endif %}
