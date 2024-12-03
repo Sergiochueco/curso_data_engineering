@@ -62,8 +62,6 @@ models:
         +schema: ux_ui
       sales:
         +schema: sales
-      data_science:
-        +schema: data_science
     intermediate:
       +materialized: view
       +database: "{{ env_var('DBT_ENVIRONMENTS') }}_GOLD_DB"
