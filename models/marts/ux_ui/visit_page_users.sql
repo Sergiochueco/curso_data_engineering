@@ -8,9 +8,9 @@ WITH dim__users AS (
     SELECT * 
     FROM {{ ref('dim__users') }}
 )
-, dim__addresses_users AS(
+, dim__addresses AS(
     SELECT *
-    FROM {{ ref('dim__addresses_users') }}
+    FROM {{ ref('dim__addresses') }}
 )
 , fct__events AS(
     SELECT *
@@ -29,7 +29,7 @@ SELECT
     , SUM(CASE WHEN e.event_type = 'package_shipped' THEN 1 ELSE 0 END) AS number_package_shipped
 
 FROM dim__users AS u
-LEFT JOIN dim__addresses_users AS a
+LEFT JOIN dim__addresses AS a
     ON u.address_id = a.address_id
 LEFT JOIN fct__events AS e
     ON u.user_id = e.user_id
