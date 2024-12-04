@@ -1,45 +1,8 @@
 version: 2
 
 models:
-  - name: dim__addresses_orders
-    description: "Dim addresses to cross with dim orders"
-    columns:
-      - name: country
-        data_type: varchar
-        description: "Name of the country for the address"
-
-      - name: address_id
-        data_type: varchar
-        description: "UUID for each unique address on platform"
-
-      - name: address
-        data_type: varchar
-        description: "Street name for the address"
-
-      - name: zipcode
-        data_type: varchar
-        description: "identify specific geographic areas"
-
-      - name: state_id
-        data_type: varchar
-        description: "identifier of the state for the address"
-
-      - name: states_usa
-        data_type: varchar
-        description: "Name of the state for the address"
-
-      - name: eliminado_por_fivetran
-        data_type: boolean
-        description: "Indicates if the record was deleted in Fivetran sync process"
-
-      - name: data_load_utc
-        data_type: timestamp_tz
-        description: "Timestamp of the last Fivetran sync"
-
-
-
-  - name: dim__addresses_users
-    description: "Dim addresses to cross with dim users"
+  - name: dim__addresses
+    description: "Dim addresses"
     columns:
       - name: country
         data_type: varchar

@@ -12,9 +12,9 @@ WITH dim__users AS (
     SELECT *
     FROM {{ ref('fct__details_orders') }}
 )
-, dim__addresses_users AS(
+, dim__addresses AS(
     SELECT *
-    FROM {{ref('dim__addresses_users')}}
+    FROM {{ref('dim__addresses')}}
 )
 , dim__promos AS(
     SELECT *
@@ -44,7 +44,7 @@ SELECT
     , count(DISTINCT o.product_id) AS total_diff_products
 
 FROM dim__users AS u
-LEFT JOIN dim__addresses_users AS a
+LEFT JOIN dim__addresses AS a
     ON u.address_id = a.address_id
 LEFT JOIN fct_detail_orders AS o
     ON u.user_id = o.user_id
