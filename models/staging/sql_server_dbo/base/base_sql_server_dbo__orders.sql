@@ -1,8 +1,6 @@
 {{
   config(
-    materialized='incremental',
-    unique_key=['order_id'],
-    on_schema_change ='fail'
+    materialized='view'
   )
 }}
 
@@ -53,8 +51,3 @@ SELECT
 FROM clean_values_promos
 
 
-{% if is_incremental() %}
-
-  where data_load_utc > (select max(data_load_utc) from {{ this }})
-
-{% endif %}
